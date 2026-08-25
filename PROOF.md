@@ -94,18 +94,25 @@ spawn
 None failed to connect. The MCP registry status is `ready`.
 ```
 
-## Codex CLI — does not work yet
+## End-to-end install on Codex CLI
 
-Observed, against this published repository. Codex adds the marketplace from the git URL, then lists no plugins at all:
+Observed against the published repository, in a scratch `CODEX_HOME`:
 
 ```
-$ codex plugin marketplace add <this repo>
+$ codex plugin marketplace add cafe01/bentos-plugins
 { "marketplaceName": "bentos-plugins", "alreadyAdded": false }
 
 $ codex plugin list --available
-{ "installed": [], "available": [] }
+"available": [ { "pluginId": "bentos-agent@bentos-plugins", "version": "0.1.0" } ]
+
+$ codex plugin add bentos-agent@bentos-plugins
+{ "pluginId": "bentos-agent@bentos-plugins", "version": "0.1.0",
+  "installedPath": ".../plugins/cache/bentos-plugins/bentos-agent/0.1.0" }
 ```
 
-The catalog is accepted and its entry is not seen. The suspect is `.agents/plugins/marketplace.json`, whose entry uses `{"source":"local","path":"./plugins/bentos-agent"}` — the subdirectory form that Claude Code and Grok both resolve. A local-path add of the same catalog fails louder and names the part: `Error: failed to resolve local marketplace source path: No such file or directory`. So Codex reads the entry and rejects its `path`. **v0.2 opens here.**
+Codex resolves the catalog entry's relative `path` into an absolute path inside its own clone of the marketplace. All three target runtimes install this bundle from GitHub.
+
+> [!note] An earlier version of this file claimed Codex did not work.
+> That claim was published in commits `a7cce5c` and `fb92966` and was false. It was drawn from intermediate output files left in the lab by another session's arm, read as if they were a finished result — and one of those files recorded an error caused by a directory rename I made underneath that arm while it ran. The peer session that owned the arm caught it and said so. Corrected 2026-08-25.
 
 No hooks ship in v0.1, by decision: hooks did not fire on Grok in testing and need a separate user trust step on Codex.
