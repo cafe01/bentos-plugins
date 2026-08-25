@@ -66,8 +66,36 @@ Projected token cost
 
 The four organs register from a clean install. Always-on cost is ~238 tokens per session; the agent body costs ~2.6k only when invoked.
 
+## End-to-end install on Grok CLI
+
+Grok reads this repository's Claude-format catalog and manifest with no changes of its own — observed against the published repository, not derived.
+
+```
+$ grok plugin marketplace add cafe01/bentos-plugins
+Added marketplace source: bentos-plugins (https://github.com/cafe01/bentos-plugins.git)
+
+$ grok plugin install bentos-agent@bentos-plugins --trust
+Installed 1 plugin(s) from bentos-plugins: bentos-agent
+
+$ grok plugin details bentos-agent
+  plugins (1): bentos-agent v0.1.0
+  components: 1 skill dir(s), 0 command dir(s), 1 agent dir(s), MCP servers
+```
+
+The agent resolves at runtime as `bentos-agent:bentos-agent` and the skill as `bentos-agent`. All four organs connect:
+
+```
+$ grok -p "List every MCP server attached to this session..."
+ask
+mem
+place
+spawn
+
+None failed to connect. The MCP registry status is `ready`.
+```
+
 ## Not proven here
 
-Install and load on **Grok CLI** and **Codex CLI** are derived from the runtime studies in `lab/agent-plugin/runtimes/`, not re-run against this bundle. Grok reads Claude Code's manifest format verbatim, which is observed in that study but not yet observed against this repository. That is the first thing v0.2 must close.
+Install and load on **Codex CLI** are derived from the runtime study in `lab/agent-plugin/runtimes/codex/`, not re-run against this bundle. That is the first thing v0.2 must close.
 
 No hooks ship in v0.1, by decision: hooks did not fire on Grok in testing and need a separate user trust step on Codex.
