@@ -94,8 +94,18 @@ spawn
 None failed to connect. The MCP registry status is `ready`.
 ```
 
-## Not proven here
+## Codex CLI — does not work yet
 
-Install and load on **Codex CLI** are derived from the runtime study in `lab/agent-plugin/runtimes/codex/`, not re-run against this bundle. That is the first thing v0.2 must close.
+Observed, against this published repository. Codex adds the marketplace from the git URL, then lists no plugins at all:
+
+```
+$ codex plugin marketplace add <this repo>
+{ "marketplaceName": "bentos-plugins", "alreadyAdded": false }
+
+$ codex plugin list --available
+{ "installed": [], "available": [] }
+```
+
+The catalog is accepted and its entry is not seen. The suspect is `.agents/plugins/marketplace.json`, whose entry uses `{"source":"local","path":"./plugins/bentos-agent"}` — the subdirectory form that Claude Code and Grok both resolve. Unproven which part Codex rejects: the wrapper's location, the `local` source type, or the relative path. **v0.2 opens here.**
 
 No hooks ship in v0.1, by decision: hooks did not fire on Grok in testing and need a separate user trust step on Codex.
