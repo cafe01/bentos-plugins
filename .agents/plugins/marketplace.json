@@ -1,9 +1,9 @@
 {
-  "name": "bentos-agent-plugin",
+  "name": "bentos-plugins",
   "plugins": [
     {
       "name": "bentos-agent",
-      "source": { "source": "local", "path": "./" },
+      "source": { "source": "local", "path": "./plugins/bentos-agent" },
       "policy": { "installation": "AVAILABLE", "authentication": "ON_USE" },
       "category": "Productivity"
     }
