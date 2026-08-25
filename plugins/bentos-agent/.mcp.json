@@ -2,19 +2,36 @@
   "mcpServers": {
     "mem": {
       "command": "mcp",
-      "args": ["mem", "--name", "mem"]
+      "args": [
+        "mem",
+        "--name",
+        "mem"
+      ]
     },
     "place": {
       "command": "mcp",
-      "args": ["place", "--name", "place"]
+      "args": [
+        "place",
+        "--name",
+        "place"
+      ]
     },
     "ask": {
       "command": "mcp",
-      "args": ["ask", "--name", "ask"]
+      "args": [
+        "ask",
+        "--name",
+        "ask"
+      ]
     },
     "spawn": {
       "command": "mcp",
-      "args": ["bentos-agent", "claude-spawn", "--name", "spawn"]
+      "args": [
+        "bentos-agent",
+        "spawn",
+        "--name",
+        "spawn"
+      ]
     }
   }
 }
