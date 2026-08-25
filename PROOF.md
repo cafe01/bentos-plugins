@@ -42,6 +42,30 @@ Validating marketplace manifest: .../.claude-plugin/marketplace.json
 | `.claude-plugin/marketplace.json` (catalog) + `plugins/bentos-agent/.claude-plugin/plugin.json` | Serves Claude Code and Grok CLI. |
 | `.agents/plugins/marketplace.json` (catalog) + `plugins/bentos-agent/.codex-plugin/plugin.json` | Serves Codex CLI. |
 
+## End-to-end install from GitHub
+
+The stranger's path, run against the published repository and then removed again:
+
+```
+$ claude plugin marketplace add cafe01/bentos-plugins
+✔ Successfully added marketplace: bentos-plugins (declared in user settings)
+
+$ claude plugin install bentos-agent@bentos-plugins
+✔ Successfully installed plugin: bentos-agent@bentos-plugins (scope: user)
+
+$ claude plugin details bentos-agent
+BentOS Agent (bentos-agent) 0.1.0
+Component inventory
+  Skills (1)  bentos-agent
+  Agents (1)  bentos-agent
+  Hooks (0)
+  MCP servers (4)  mem, place, ask, spawn
+Projected token cost
+  Always-on:   ~238 tok   added to every session
+```
+
+The four organs register from a clean install. Always-on cost is ~238 tokens per session; the agent body costs ~2.6k only when invoked.
+
 ## Not proven here
 
 Install and load on **Grok CLI** and **Codex CLI** are derived from the runtime studies in `lab/agent-plugin/runtimes/`, not re-run against this bundle. Grok reads Claude Code's manifest format verbatim, which is observed in that study but not yet observed against this repository. That is the first thing v0.2 must close.
