@@ -1,0 +1,15 @@
+{
+  "name": "bentos-agent-plugin",
+  "description": "Marketplace for the bentos-agent species — a persistent agent persona with memory, place, ask, and spawn organs.",
+  "owner": {
+    "name": "Café / BentOS",
+    "email": "cafe01@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "bentos-agent",
+      "source": "./",
+      "description": "The bentos-agent species as an installable custom agent, with its memory/place/ask/spawn organs."
+    }
+  ]
+}

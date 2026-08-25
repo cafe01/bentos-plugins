@@ -1,0 +1,12 @@
+{
+  "name": "bentos-agent",
+  "displayName": "BentOS Agent",
+  "version": "0.1.0",
+  "description": "The bentos-agent species: a persistent, self-continuing agent persona with a memory organ (mem), a spatial organ (place), a voice organ (ask), and a runtime organ (spawn).",
+  "author": {
+    "name": "Café / BentOS",
+    "email": "cafe01@gmail.com"
+  },
+  "license": "MIT",
+  "keywords": ["bentos", "agent", "persona", "memory", "mcp"]
+}
