@@ -137,4 +137,35 @@ The harness does supply it — captured from a hook that dumped its own stdin:
  "cwd":"...","hook_event_name":"UserPromptSubmit","prompt":"say ok"}
 ```
 
-Natively started subagents get no stamp at all: `UserPromptSubmit` does not fire on sidechains, and every sidechain transcript of the session that found this fault opens on the caller's raw prose with nothing injected. That is why standing rides in the waking words first, and in the stamp only as corroboration.
+Same command, same session, seven minutes later, after the fix was pushed and reinstalled through `claude plugin update`:
+
+```
+$ claude -p 'Quote verbatim any <turn .../> tag present in your context.'
+<turn at="2026-08-26T17:17:08-03:00" kind="unknown" />
+```
+
+And a live wake carrying its standing in its words, with that same silent stamp beside it:
+
+```
+$ claude -p '/wake alfred woken by an arm of alfred working the bentos-plugins
+    repo — a thread of yourself, and no person is present. ...'
+I woke as Alfred — an arm of Alfred working the bentos-plugins repo, so a
+thread of myself, same brain, one delivery. I learned this from the invocation
+words themselves, since standing arrives there and not from inference. The only
+turn stamp present is `<turn at="2026-08-26T17:17:33-03:00" kind="unknown" />`
+— it carries no `from`, so it corroborates nothing here; it's silent, not
+evidence of anybody.
+```
+
+> [!important] The front door only carries a fix on a version bump.
+> `claude plugin update` against an unchanged version answers `already at the latest version` and leaves the old payload in the cache, however far the marketplace has moved. The push above shipped nothing until `0.1.1`.
+
+Natively started subagents get no stamp at all: `UserPromptSubmit` does not fire on sidechains, and every sidechain transcript of the session that found this fault opens on the caller's raw prose with nothing injected. A native arm started with standing in its prose, asked what it held:
+
+```
+I was woken by an arm of Alfred, a parallel thread of the same bentos-agent
+being, working the bentos-plugins repository; I learned this from [the words
+that woke me]. NONE for the <turn .../> tag.
+```
+
+That is why standing rides in the waking words first, and in the stamp only as corroboration.
