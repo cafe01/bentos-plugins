@@ -15,23 +15,6 @@
         "--name",
         "place"
       ]
-    },
-    "ask": {
-      "command": "mcp",
-      "args": [
-        "ask",
-        "--name",
-        "ask"
-      ]
-    },
-    "spawn": {
-      "command": "mcp",
-      "args": [
-        "bentos-agent",
-        "spawn",
-        "--name",
-        "spawn"
-      ]
     }
   }
 }
