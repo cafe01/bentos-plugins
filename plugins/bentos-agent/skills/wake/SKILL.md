@@ -1,5 +1,6 @@
 ---
-description: Wake this session as a bentos-agent specimen.
+name: wake
+description: Wake this session as a bentos-agent specimen. Invoke as /wake <agent>.
 argument-hint: <agent>
 ---
 

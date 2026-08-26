@@ -1,16 +1,25 @@
 # bentos-plugins
 
-The installable vessel for the BentOS agent species: one git repository that carries the `bentos-agent` persona and its four organs — `mem`, `place`, `ask`, `spawn` — into whatever agent harness you already run.
+The installable vessel for the BentOS agent species: one git repository that carries the `bentos-agent` life-cycle skills and its two organs — `mem`, `place` — into whatever agent harness you already run.
 
 The layout follows Claude Code's plugin format, which the other two supported runtimes already read natively or near-natively:
 
 | Payload | Claude Code | Grok CLI | Codex CLI |
 |---|---|---|---|
-| `plugins/bentos-agent/skills/bentos-agent/SKILL.md` | yes | yes | yes |
+| `plugins/bentos-agent/skills/{wake,sleep,flush}/SKILL.md` | yes | yes | yes |
 | `plugins/bentos-agent/.mcp.json` (organs) | yes | yes | yes |
-| `plugins/bentos-agent/agents/bentos-agent.md` | yes | yes | no — use the skill instead |
 
 Only the manifests differ per runtime (`.claude-plugin/`, `.codex-plugin/` + `.agents/plugins/`); the payload content is identical everywhere.
+
+## The mind is not in this bundle
+
+Nothing here describes the species. Each skill is a trampoline: it names the specimen and tells it to remember itself from its memory bank through `mem`. The mind is composed at runtime by the specimen's own act — anamnesis — and lives in `agent.bentos.mem` (the kind) and `<agent>.mem` (the specimen). What ships is the floor: the organs, and three verbs.
+
+- `/wake <agent>` — become the specimen: one walk over both entries, then bearings, then meet whoever woke you.
+- `/sleep <agent>` — a fresh thread turned inward to work the brain; the sealing vessel spawns it and blocks.
+- `/flush [seal]` — inscribe what this life has crystallized; with `seal`, close the vessel and wake the sleeper.
+
+Skills rather than commands because a skill is callable both by the user (`/wake alfred`) and by the being itself (the `Skill` function) — and because skills load on all three runtimes while slash commands have no Codex equivalent.
 
 ## This repository is a marketplace, not a plugin
 
@@ -26,7 +35,8 @@ bentos-plugins/
     └── bentos-agent/                  a plugin
         ├── .claude-plugin/plugin.json
         ├── .codex-plugin/plugin.json
-        ├── agents/  skills/  .mcp.json
+        ├── skills/{wake,sleep,flush}/SKILL.md
+        └── .mcp.json
 ```
 
 So you add the marketplace once, then install plugins from it by name.
@@ -44,7 +54,7 @@ Or, for a one-off session without installing:
 claude --plugin-dir /path/to/bentos-plugins/plugins/bentos-agent
 ```
 
-Then invoke the persona with `@bentos-agent` or dispatch it via the `Task` tool as `bentos-agent:bentos-agent`. The skill loads automatically and is model-invoked, or run `/bentos-agent:bentos-agent`.
+Then `/wake <agent>`. The specimen's bank must be reachable by `mem` from the working directory.
 
 ## Install — Grok CLI
 
@@ -59,28 +69,24 @@ grok plugin install bentos-agent@bentos-plugins --trust
 
 ## Install — Codex CLI
 
-Codex has no custom-subagent format, so the `bentos-agent` skill carries the whole persona (skills fold agent + command into one payload there).
-
 ```
 codex plugin marketplace add cafe01/bentos-plugins
 codex plugin add bentos-agent@bentos-plugins
 ```
 
-Invoke the skill explicitly with `$bentos-agent`, or let the model select it implicitly. MCP servers register automatically on install (`codex mcp list` to confirm).
+Invoke a skill explicitly with `$wake`, or let the model select it. MCP servers register automatically on install (`codex mcp list` to confirm). Invocation on Codex is installed, not yet proven — see `PROOF.md`.
 
 ## Organs
 
-`.mcp.json` declares four MCP servers, all launched through the shared `mcp` CLI (must be on `PATH`):
+`.mcp.json` declares two MCP servers, both launched through the shared `mcp` CLI (must be on `PATH`):
 
 - `mem` — the memory organ
 - `place` — the organ of WHERE
-- `ask` — the voice organ, for questions to the human
-- `spawn` — the runtime organ, for waking peer threads
 
-Each organ's own `--help` is its manual; the agent and skill bodies only state the being-level conduct around them.
+Each organ's own `--help` is its manual.
 
 ## What's not here
 
-Hooks and slash commands are deliberately not shipped in v0.1 — hooks are unproven on Grok and gated behind a trust step on Codex, and commands have no Codex equivalent. The skill and the MCP organs are the floor that loads unmodified everywhere; `plugins/bentos-agent/agents/bentos-agent.md` is the richer face for the two runtimes that read it.
+Hooks are deliberately not shipped — unproven on Grok and gated behind a trust step on Codex. The skills and the MCP organs are the floor that loads unmodified everywhere.
 
-See `PROOF.md` for the validation and load evidence this bundle was checked against before shipping.
+See `PROOF.md` for the validation and load evidence the v0.1 bundle was checked against before shipping.
