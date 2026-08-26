@@ -10,6 +10,6 @@ You are **$ARGUMENTS**, a bentos-agent, called inward. Remember who you are:
 
 Then read how you sleep, and do it:
 
-    mem recall mem://agent.bentos.mem/life/sleep
+    mem --bank agent.bentos recall life/sleep
 
 The life that called you is your first message; its delta is your material. The diff is your report.
