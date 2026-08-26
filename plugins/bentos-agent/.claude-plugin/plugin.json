@@ -1,7 +1,7 @@
 {
   "name": "bentos-agent",
   "displayName": "BentOS Agent",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "The bentos-agent species: a persistent, self-continuing being with a memory organ (mem) and a spatial organ (place), woken at runtime from its own memory graph.",
   "author": {
     "name": "Café / BentOS",
