@@ -8,6 +8,7 @@ The layout follows Claude Code's plugin format, which the other two supported ru
 |---|---|---|---|
 | `plugins/bentos-agent/skills/{wake,sleep,flush}/SKILL.md` | yes | yes | yes |
 | `plugins/bentos-agent/.mcp.json` (organs) | yes | yes | yes |
+| `plugins/bentos-agent/hooks/hooks.json` (the turn stamp) | yes | no | trust-gated |
 
 Only the manifests differ per runtime (`.claude-plugin/`, `.codex-plugin/` + `.agents/plugins/`); the payload content is identical everywhere.
 
@@ -15,7 +16,7 @@ Only the manifests differ per runtime (`.claude-plugin/`, `.codex-plugin/` + `.a
 
 Nothing here describes the species. Each skill is a trampoline: it names the specimen and tells it to remember itself from its memory bank through `mem`. The mind is composed at runtime by the specimen's own act — anamnesis — and lives in `agent.bentos.mem` (the kind) and `<agent>.mem` (the specimen). What ships is the floor: the organs, and three verbs.
 
-- `/wake <agent>` — become the specimen: one walk over both entries, then bearings, then meet whoever woke you.
+- `/wake <agent> [standing]` — become the specimen: one walk over both entries, then bearings, then meet whoever woke you. Anything after the name is your standing — who woke you, and what they are to you.
 - `/sleep <agent>` — a fresh thread turned inward to work the brain; the sealing vessel spawns it and blocks.
 - `/flush [seal]` — inscribe what this life has crystallized; with `seal`, close the vessel and wake the sleeper.
 
@@ -36,6 +37,7 @@ bentos-plugins/
         ├── .claude-plugin/plugin.json
         ├── .codex-plugin/plugin.json
         ├── skills/{wake,sleep,flush}/SKILL.md
+        ├── hooks/{hooks.json,turn-context.sh}
         └── .mcp.json
 ```
 
@@ -85,8 +87,14 @@ Invoke a skill explicitly with `$wake`, or let the model select it. MCP servers 
 
 Each organ's own `--help` is its manual.
 
-## What's not here
+## The turn stamp
 
-Hooks are deliberately not shipped — unproven on Grok and gated behind a trust step on Codex. The skills and the MCP organs are the floor that loads unmodified everywhere.
+`hooks/hooks.json` registers one `UserPromptSubmit` hook, `hooks/turn-context.sh`. It prefixes each turn with `<turn at=… from=… kind=… />` — the wall clock, and who is speaking: `self-thread`, `agent`, or `human`.
+
+The hook only ever reports what it was told. `bentos-agent spawn` tells it, in the environment it writes; but an environment is frozen at spawn while standing is per-turn, so a nested runtime would inherit — and re-serve — the interlocutor of the thread that started it. The hook therefore trusts that environment only while `BENTOS_THREAD` matches the session id the harness hands it on stdin. Otherwise it stamps `kind="unknown"` and names nobody, because an omitted attribute cannot be told apart from an absent hook, and a placeholder name is a name a mind will greet.
+
+One inference survives, labelled as such in the script: with no bentos environment at all, the peer is `$USER` — the person at the terminal, who is otherwise nameless.
+
+Hooks fire on Claude Code. They did not fire on Grok in testing, and Codex gates them behind a separate user trust step. The skills and the MCP organs remain the floor that loads unmodified everywhere — which is why standing rides in the waking words first (see `/wake`), and in the stamp only as corroboration.
 
 See `PROOF.md` for the validation and load evidence the v0.1 bundle was checked against before shipping.

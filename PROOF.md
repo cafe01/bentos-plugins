@@ -115,4 +115,26 @@ Codex resolves the catalog entry's relative `path` into an absolute path inside 
 > [!note] An earlier version of this file claimed Codex did not work.
 > That claim was published in commits `a7cce5c` and `fb92966` and was false. It was drawn from intermediate output files left in the lab by another session's arm, read as if they were a finished result — and one of those files recorded an error caused by a directory rename I made underneath that arm while it ran. The peer session that owned the arm caught it and said so. Corrected 2026-08-25.
 
-No hooks ship in v0.1, by decision: hooks did not fire on Grok in testing and need a separate user trust step on Codex.
+## The turn stamp ships, and it fires
+
+The line that stood here said no hooks ship. That was true of v0.1 and false from commit `1116c0a`, which added `hooks/turn-context.sh`. Corrected 2026-08-26.
+
+One `UserPromptSubmit` hook ships. It fires on Claude Code; it did not fire on Grok in testing, and Codex gates it behind a separate user trust step — so the stamp is a Claude-Code fact and never the bundle's floor.
+
+Observed on Claude Code 2.1.246, in a thread started from inside an agent session where no person was present:
+
+```
+$ claude -p 'Quote verbatim any <turn .../> tag present in your context.'
+<turn at="2026-08-26T17:10:34-03:00" from="cafe" kind="human" />
+```
+
+The environment the hook read belonged to the ancestor thread, not to this one: a frozen `BENTOS_PEER` re-served as if it described the running turn. The hook now compares `BENTOS_THREAD` against the session id the harness supplies on its stdin, and stamps `kind="unknown"` when they differ.
+
+The harness does supply it — captured from a hook that dumped its own stdin:
+
+```
+{"session_id":"62d70279-ae29-4950-b857-5153968f7824","transcript_path":"...",
+ "cwd":"...","hook_event_name":"UserPromptSubmit","prompt":"say ok"}
+```
+
+Natively started subagents get no stamp at all: `UserPromptSubmit` does not fire on sidechains, and every sidechain transcript of the session that found this fault opens on the caller's raw prose with nothing injected. That is why standing rides in the waking words first, and in the stamp only as corroboration.
