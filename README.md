@@ -8,7 +8,7 @@ The layout follows Claude Code's plugin format, which the other two supported ru
 |---|---|---|---|
 | `plugins/bentos-agent/skills/{wake,sleep,flush}/SKILL.md` | yes | yes | yes |
 | `plugins/bentos-agent/.mcp.json` (organs) | yes | yes | yes |
-| `plugins/bentos-agent/hooks/hooks.json` (the turn stamp) | yes | no | trust-gated |
+| `plugins/bentos-agent/hooks/hooks.json` (the turn stamp) | yes | not installed | trust-gated |
 
 Only the manifests differ per runtime (`.claude-plugin/`, `.codex-plugin/` + `.agents/plugins/`); the payload content is identical everywhere.
 
@@ -95,6 +95,6 @@ The hook only ever reports what it was told. `bentos-agent spawn` tells it, in t
 
 One inference survives, labelled as such in the script: with no bentos environment at all, the peer is `$USER` — the person at the terminal, who is otherwise nameless.
 
-Hooks fire on Claude Code. They did not fire on Grok in testing, and Codex gates them behind a separate user trust step. The skills and the MCP organs remain the floor that loads unmodified everywhere — which is why standing rides in the waking words first (see `/wake`), and in the stamp only as corroboration.
+The stamp exists to inject `additionalContext`. Grok discards that on `UserPromptSubmit`, so the Grok manifest (`plugin.json`) sets `"hooks": ""` and does not install the hook. Claude Code loads it from `.claude-plugin/plugin.json`. Codex still discovers `hooks/hooks.json` and gates it behind trust. Standing rides in the waking words first (see `/wake`); the stamp is corroboration on harnesses that will actually inject it.
 
 See `PROOF.md` for the validation and load evidence the v0.1 bundle was checked against before shipping.
