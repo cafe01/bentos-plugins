@@ -25,6 +25,10 @@ input=""
 IFS= read -r -t 2 input
 
 session=$(printf '%s' "$input" | sed -n 's/.*"session_id"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p')
+# Grok names the session on the process; Claude puts it on stdin. Either is a telling.
+if [ -z "$session" ]; then
+  session="${GROK_SESSION_ID:-}"
+fi
 
 agent="${BENTOS_AGENT:-}"
 thread="${BENTOS_THREAD:-}"

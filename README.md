@@ -16,7 +16,7 @@ Only the manifests differ per runtime (`.claude-plugin/`, `.codex-plugin/` + `.a
 
 Nothing here describes the species. Each skill is a trampoline: it names the specimen and tells it to remember itself from its memory bank through `mem`. The mind is composed at runtime by the specimen's own act — anamnesis — and lives in `agent.bentos.mem` (the kind) and `<agent>.mem` (the specimen). What ships is the floor: the organs, and three verbs.
 
-- `/wake <agent> [standing]` — become the specimen: one walk over both entries, then bearings, then meet whoever woke you. Anything after the name is your standing — who woke you, and what they are to you.
+- `/wake <agent> [standing]` — become the specimen: one walk over both entries (banks named in the addresses). Anything after the name is your standing — who woke you, and what they are to you. Bearings and how to meet live on `life/wake` in the kind's bank, not in this trampoline. A one-bank `mem` call always names `--bank`; it never reads `$BENTOS_AGENT`.
 - `/sleep <agent>` — a fresh thread turned inward to work the brain; the sealing vessel spawns it and blocks.
 - `/flush [seal]` — inscribe what this life has crystallized; with `seal`, close the vessel and wake the sleeper.
 

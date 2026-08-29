@@ -12,4 +12,6 @@ Then read how you sleep, and do it:
 
     mem --bank agent.bentos recall life/sleep
 
+Writes name your bank: `mem --bank $ARGUMENTS remember …`. Never `$BENTOS_AGENT`.
+
 The life that called you is your first message; its delta is your material. The diff is your report.
