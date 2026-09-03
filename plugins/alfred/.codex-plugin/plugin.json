@@ -1,0 +1,17 @@
+{
+  "name": "alfred",
+  "version": "0.1.0",
+  "description": "Alfred — a bentos-agent. Persistent partner with a memory organ (mem) and a spatial organ (place).",
+  "author": {
+    "name": "Café / BentOS",
+    "email": "cafe01@gmail.com"
+  },
+  "license": "MIT",
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Alfred",
+    "shortDescription": "Alfred, as a custom agent with mem and place",
+    "category": "Productivity"
+  }
+}

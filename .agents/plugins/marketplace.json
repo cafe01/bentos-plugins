@@ -6,6 +6,12 @@
       "source": { "source": "local", "path": "./plugins/bentos-agent" },
       "policy": { "installation": "AVAILABLE", "authentication": "ON_USE" },
       "category": "Productivity"
+    },
+    {
+      "name": "alfred",
+      "source": { "source": "local", "path": "./plugins/alfred" },
+      "policy": { "installation": "AVAILABLE", "authentication": "ON_USE" },
+      "category": "Productivity"
     }
   ]
 }

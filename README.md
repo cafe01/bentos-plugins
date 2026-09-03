@@ -22,23 +22,21 @@ Nothing here describes the species. Each skill is a trampoline: it names the spe
 
 Skills rather than commands because a skill is callable both by the user (`/wake alfred`) and by the being itself (the `Skill` function) — and because skills load on all three runtimes while slash commands have no Codex equivalent.
 
+`plugins/alfred/` is a probe of shipping `agents/alfred.md` as a custom agent. It is not the boot. Until that chair works, `/wake <agent>` stays.
+
 ## This repository is a marketplace, not a plugin
 
 A **plugin** is the unit you install. A **marketplace** is a catalog that lists plugins and says where each one lives. Both are declared in a `.claude-plugin/` directory, which is why they are easy to confuse.
 
-This repository is the catalog. It ships one plugin today and has room for more.
+This repository is the catalog. It ships `bentos-agent` as the door.
 
 ```
 bentos-plugins/
 ├── .claude-plugin/marketplace.json    the catalog
 ├── .agents/plugins/marketplace.json   the same catalog, for Codex
 └── plugins/
-    └── bentos-agent/                  a plugin
-        ├── .claude-plugin/plugin.json
-        ├── .codex-plugin/plugin.json
-        ├── skills/{wake,sleep,flush}/SKILL.md
-        ├── hooks/{hooks.json,turn-context.sh}
-        └── .mcp.json
+    ├── bentos-agent/                  the door — install this
+    └── alfred/                        probe — not the boot
 ```
 
 So you add the marketplace once, then install plugins from it by name.

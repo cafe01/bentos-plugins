@@ -10,6 +10,11 @@
       "name": "bentos-agent",
       "source": "./plugins/bentos-agent",
       "description": "The bentos-agent species as an installable custom agent, with its mem, place, ask and spawn organs."
+    },
+    {
+      "name": "alfred",
+      "source": "./plugins/alfred",
+      "description": "Probe — agents/alfred.md as a custom agent. Not the boot."
     }
   ]
 }
