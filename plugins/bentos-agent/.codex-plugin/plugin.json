@@ -1,7 +1,7 @@
 {
   "name": "bentos-agent",
-  "version": "0.1.3",
-  "description": "The bentos-agent species: a persistent, self-continuing agent persona with a memory organ (mem), a spatial organ (place), a voice organ (ask), and a runtime organ (spawn).",
+  "version": "0.1.4",
+  "description": "The bentos-agent species: a persistent, self-continuing being with a memory organ (mem), woken at runtime from its own memory graph.",
   "author": {
     "name": "Café / BentOS",
     "email": "cafe01@gmail.com"
@@ -11,7 +11,7 @@
   "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "BentOS Agent",
-    "shortDescription": "The bentos-agent species, as a skill and MCP organ set",
+    "shortDescription": "The bentos-agent species, as skills and the mem organ",
     "category": "Productivity"
   }
 }

@@ -1,6 +1,6 @@
 # bentos-plugins
 
-The installable vessel for the BentOS agent species: one git repository that carries the `bentos-agent` life-cycle skills and its two organs — `mem`, `place` — into whatever agent harness you already run.
+The installable vessel for the BentOS agent species: one git repository that carries the `bentos-agent` life-cycle skills and its organ — `mem` — into whatever agent harness you already run.
 
 The layout follows Claude Code's plugin format, which the other two supported runtimes already read natively or near-natively:
 
@@ -16,7 +16,7 @@ Only the manifests differ per runtime (`.claude-plugin/`, `.codex-plugin/` + `.a
 
 Nothing here describes the species. Each skill is a trampoline: it names the specimen and tells it to remember itself from its memory bank through `mem`. The mind is composed at runtime by the specimen's own act — anamnesis — and lives in `agent.bentos.mem` (the kind) and `<agent>.mem` (the specimen). What ships is the floor: the organs, and three verbs.
 
-- `/wake <agent> [standing]` — become the specimen: one walk over both entries (banks named in the addresses). Anything after the name is your standing — who woke you, and what they are to you. Bearings and how to meet live on `life/wake` in the kind's bank, not in this trampoline. A one-bank `mem` call always names `--bank`; it never reads `$BENTOS_AGENT`.
+- `/wake <agent> [standing]` — become the specimen: one walk over both entries (banks named in the addresses), staged by ring (`--depth 2`) and not by heat — what the specimen's own page links is what it wakes with. Anything after the name is your standing — who woke you, and what they are to you. Bearings and how to meet live on `life/wake` in the kind's bank, not in this trampoline. A one-bank `mem` call always names `--bank`; it never reads `$BENTOS_AGENT`.
 - `/sleep <agent>` — a fresh thread turned inward to work the brain; the sealing vessel spawns it and blocks.
 - `/flush [seal]` — inscribe what this life has crystallized; with `seal`, close the vessel and wake the sleeper.
 
@@ -40,6 +40,26 @@ bentos-plugins/
 ```
 
 So you add the marketplace once, then install plugins from it by name.
+
+## Before any runtime — `mcp` and `mem` on `PATH`
+
+The plugin ships no binaries; it launches `mcp`, which presents `mem`. Both come from [`bentos-userland`](https://github.com/cafe01/bentos-userland) releases, and they are the only two this plugin needs.
+
+Windows (PowerShell):
+
+```
+iwr https://github.com/cafe01/bentos-userland/releases/latest/download/bootstrap.ps1 -UseBasicParsing | iex
+bentos install mcp mem
+```
+
+Linux / macOS:
+
+```
+curl -fsSL https://github.com/cafe01/bentos-userland/releases/latest/download/bootstrap.sh | sh
+bentos install mcp mem
+```
+
+The bootstrap puts `bentos` in `~/.bentos/bin` and that directory on your `PATH`; open a new terminal before `bentos install`. Name the two executables — a bare `bentos install` installs the whole userland, which the plugin does not need. Use `bentos-userland` ≥ 0.1.12: earlier `mem` decodes a piped body in the platform code page and writes mojibake on Windows.
 
 ## Install — Claude Code
 
@@ -78,12 +98,11 @@ Invoke a skill explicitly with `$wake`, or let the model select it. MCP servers 
 
 ## Organs
 
-`.mcp.json` declares two MCP servers, both launched through the shared `mcp` CLI (must be on `PATH`):
+`.mcp.json` declares one MCP server, launched through the shared `mcp` CLI (must be on `PATH`):
 
 - `mem` — the memory organ
-- `place` — the organ of WHERE
 
-Each organ's own `--help` is its manual.
+Its own `--help` is its manual. `place` was dropped in 0.1.4: nothing in the boot needs it, and every extra organ is one more binary a new machine has to get right.
 
 ## The turn stamp
 

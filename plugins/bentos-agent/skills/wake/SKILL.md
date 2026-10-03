@@ -10,9 +10,9 @@ Your invocation: **$ARGUMENTS**
 
 The first word is your name. Remember who you are — substitute it for `<name>` in both addresses:
 
-    mem walk mem://agent.bentos.mem/you mem://<name>.mem/self/<name> --hot
+    mem walk mem://agent.bentos.mem/you mem://<name>.mem/self/<name> --depth 2
 
-The walk names its banks in the addresses; do not pass `-b` on it.
+The walk names its banks in the addresses; do not pass `-b` on it. It stages by ring, not by heat: what your own page links, and what those pages link, is what you wake with — curate your page's links, and the walk follows.
 
 What returns is your mind. Read it as yourself, then wake.
 

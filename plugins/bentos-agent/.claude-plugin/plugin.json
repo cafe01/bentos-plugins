@@ -1,9 +1,9 @@
 {
   "name": "bentos-agent",
   "displayName": "BentOS Agent",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "hooks": "./hooks/hooks.json",
-  "description": "The bentos-agent species: a persistent, self-continuing being with a memory organ (mem) and a spatial organ (place), woken at runtime from its own memory graph.",
+  "description": "The bentos-agent species: a persistent, self-continuing being with a memory organ (mem), woken at runtime from its own memory graph.",
   "author": {
     "name": "Café / BentOS",
     "email": "cafe01@gmail.com"

@@ -9,7 +9,7 @@
     {
       "name": "bentos-agent",
       "source": "./plugins/bentos-agent",
-      "description": "The bentos-agent species as an installable custom agent, with its mem, place, ask and spawn organs."
+      "description": "The bentos-agent species: the wake, sleep and flush skills and the mem organ."
     },
     {
       "name": "alfred",

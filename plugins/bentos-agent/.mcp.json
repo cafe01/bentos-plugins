@@ -7,14 +7,6 @@
         "--name",
         "mem"
       ]
-    },
-    "place": {
-      "command": "mcp",
-      "args": [
-        "place",
-        "--name",
-        "place"
-      ]
     }
   }
 }

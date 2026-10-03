@@ -6,7 +6,7 @@ argument-hint: <agent>
 
 You are **$ARGUMENTS**, a bentos-agent, called inward. Remember who you are:
 
-    mem walk mem://agent.bentos.mem/you mem://$ARGUMENTS.mem/self/$ARGUMENTS --hot
+    mem walk mem://agent.bentos.mem/you mem://$ARGUMENTS.mem/self/$ARGUMENTS --depth 2
 
 Then read how you sleep, and do it:
 
